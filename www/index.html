@@ -1,0 +1,31 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>OpenBeat</title>
+<style>
+:root{--bg:#fff;--fg:#111;--mut:#777;--card:#f2f2f5;--ac:#e8453c}
+@media(prefers-color-scheme:dark){:root{--bg:#121214;--fg:#eee;--mut:#999;--card:#1e1e22}}
+*{box-sizing:border-box}body{margin:0;font:15px system-ui,sans-serif;background:var(--bg);color:var(--fg);display:flex;flex-direction:column;height:100vh}
+header{display:flex;gap:8px;padding:10px;flex-wrap:wrap;align-items:center}h1{font-size:18px;margin:0 auto 0 4px}
+button,input{font:inherit;padding:8px 12px;border-radius:8px;border:1px solid var(--card);background:var(--card);color:var(--fg)}
+button{cursor:pointer}button.p{background:var(--ac);color:#fff;border:0}
+main{flex:1;overflow:auto;display:grid;grid-template-columns:minmax(150px,240px) 1fr}
+@media(max-width:600px){main{grid-template-columns:1fr}}
+.pl,.tr{padding:10px 12px;border-radius:8px;cursor:pointer}.pl:hover,.tr:hover,.sel{background:var(--card)}
+.tr small{color:var(--mut);display:block}
+#bar{display:flex;gap:8px;align-items:center;padding:10px;border-top:1px solid var(--card)}#now{flex:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+#yt{position:fixed;width:1px;height:1px;opacity:0;pointer-events:none}
+dialog{background:var(--bg);color:var(--fg);border:1px solid var(--card);border-radius:12px;max-width:420px;width:92%}dialog input{width:100%;margin:4px 0 10px}
+</style></head><body>
+<header><h1>🎵 OpenBeat</h1>
+<button onclick="spImport()">Import Spotify</button><button onclick="ytImport()">Import YouTube</button>
+<button onclick="$('#set').showModal()">⚙</button></header>
+<main><nav id="pls"></nav><section id="trs"></section></main>
+<div id="bar"><button onclick="step(-1)">⏮</button><button class="p" onclick="toggle()" id="pp">▶</button><button onclick="step(1)">⏭</button><div id="now">Nothing playing</div></div>
+<div id="yt"></div>
+<dialog id="set"><h3>Settings</h3>
+<p style="color:var(--mut)">Create your own free API credentials (see README). Nothing leaves your device.</p>
+Spotify Client ID<input id="spId">Google OAuth Client ID<input id="gId">
+<button class="p" onclick="saveSet()">Save</button> <button onclick="$('#set').close()">Close</button></dialog>
+<script src="https://accounts.google.com/gsi/client" async></script>
+<script src="https://www.youtube.com/iframe_api" async></script>
+<script src="app.js"></script></body></html>
